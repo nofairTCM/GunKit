@@ -1,0 +1,30 @@
+{
+    "name": "qGun",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "qGunClient": {
+                "$path": "src/client"
+            }
+        },
+        "ServerStorage": {
+            "$className": "ServerStorage",
+            "qGunServer": {
+                "$path": "src/server"
+            }
+        },
+        "ReplicatedFirst": {
+            "$className": "ReplicatedFirst",
+            "qGunClientLoader": {
+                "$path": "src/app/bootClient"
+            }
+        },
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+            "qGunServerLoader": {
+                "$path": "src/app/bootServer"
+            }
+        }
+    }
+}
