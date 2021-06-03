@@ -26,7 +26,10 @@ function module:Wait(Time,Function)
 		end
 
 		if Function then
-			Function(EndTime - Now)
+			local last = Function(EndTime - Now);
+			if last then
+				return last;
+			end
 		end
 		Run.Heartbeat:Wait()
 	end

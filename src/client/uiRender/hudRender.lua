@@ -52,7 +52,7 @@ function module.init()
                 ui.ammo = this;
             end;
         };
-        TextLabel ("store") { -- 스토리지됨
+        TextLabel ("storage") { -- 스토리지됨
             BorderSizePixel = 0;
             BackgroundTransparency = 1;
             Text = "300";
@@ -63,7 +63,7 @@ function module.init()
             Font = Enum.Font.Gotham;
             TextColor3 = Color3.fromRGB(255,255,255);
             whenCreated = function (this)
-                ui.store = this;
+                ui.storage = this;
             end;
         };
         TextLabel ("dash") { -- 남은 총알 / 스토리지됨 부분
@@ -109,7 +109,36 @@ function module.init()
             whenCreated = function (this)
                 ui.healthBackgroundBar = this;
             end;
-        }
+        };
+    };
+    ui.reloadFrame = Frame ("ReloadFrame") {
+        Size = UDim2.fromOffset(120,6);
+        Position = UDim2.new(0.5,0,0.5,90);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        BackgroundColor3 = Color3.fromRGB(45,45,45);
+        BackgroundTransparency = 0.4;
+        BorderSizePixel = 0;
+        Visible = false;
+        Frame ("reloadFrameBar") {
+            BackgroundColor3 = Color3.fromRGB(233,233,233);
+            BorderSizePixel = 0;
+            Size = UDim2.fromScale(0,1);
+            whenCreated = function (this)
+                ui.reloadFrameBar = this;
+            end;
+        };
+        TextLabel ("reloadFrameText") {
+            BorderSizePixel = 0;
+            BackgroundTransparency = 1;
+            Position = UDim2.fromScale(0,1);
+            Text = "0s left";
+            TextSize = 15;
+            Font = Enum.Font.Gotham;
+            Size = UDim2.new(1,0,0,40);
+            whenCreated = function (this)
+                ui.reloadFrameText = this;
+            end;
+        };
     };
 
     return {
@@ -120,14 +149,28 @@ function module.init()
         updateParent = function (newParent) -- update parent of ui
             ui.hudHolder.Parent = newParent;
             ui.healthFrame.Parent = newParent;
+            ui.reloadFrame.Parent = newParent;
         end;
         updateName = function (newName) -- update gun name
             ui.gunName.Text = newName;
+        end;
+        updateAmmo = function (newAmmo)
+            ui.ammo.Text = tostring(newAmmo);
+        end;
+        updateStorage = function(newStorage)
+            ui.storage.Text = tostring(newStorage);
         end;
         updateHealthPercent = function (newHealthPer) -- update health bar
             -- newHealthPer = 1 ~ 0 percent of health
             ui.healthBar:TweenSize(UDim2.fromScale(newHealthPer,1),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.25,true,nil);
             ui.healthBackgroundBar:TweenSize(UDim2.fromScale(newHealthPer,1),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.4,true,nil);
+        end;
+        updateReloadFrameVisible = function(newVisible)
+            ui.reloadFrame.Visible = newVisible;
+        end;
+        updateReloadFrameStatus = function (time,newReloadPercent)
+            ui.reloadFrameBar.Size = UDim2.fromScale(newReloadPercent,1);
+            ui.reloadFrameText.Text = tostring(math.floor(time * 100) / 100) .. "s left";
         end;
     };
 end

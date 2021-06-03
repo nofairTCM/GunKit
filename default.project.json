@@ -5,7 +5,10 @@
         "ReplicatedStorage": {
             "$className": "ReplicatedStorage",
             "qGunClient": {
-                "$path": "src/client"
+                "$path": "src/client",
+                "callServer": {
+                    "$className": "RemoteFunction"
+                }
             }
         },
         "ServerStorage": {
