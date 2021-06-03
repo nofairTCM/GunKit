@@ -14,7 +14,10 @@
         "ServerStorage": {
             "$className": "ServerStorage",
             "qGunServer": {
-                "$path": "src/server"
+                "$path": "src/server",
+                "TestGun": {
+                    "$path": "src/example"
+                }
             }
         },
         "ReplicatedFirst": {

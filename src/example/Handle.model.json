@@ -1,0 +1,21 @@
+{
+    "ClassName": "Part",
+    "Properties": {
+        "Size": {
+            "Type": "Vector3",
+            "Value": [1, 1, 3]
+        }
+    },
+    "Children": [
+        {
+            "Name": "FirePos",
+            "ClassName": "Attachment",
+            "Properties": {
+                "Position": {
+                    "Type": "Vector3",
+                    "Value": [0, 0, -2.1]
+                }
+            }
+        }
+    ]
+}
