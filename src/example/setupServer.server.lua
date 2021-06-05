@@ -1,7 +1,7 @@
 --- SETUP
 local tool = script.Parent;
 
-local server = require(game:WaitForChild("ServerStorage"):WaitForChild("qGunServer"));
+local server = require(game:GetService("ServerStorage"):WaitForChild("nofairTCM_Server"):WaitForChild("GunKit"));
 local this = server:setup():setGun {
     tool = tool;
     settings = require(tool.settings);

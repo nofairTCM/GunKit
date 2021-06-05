@@ -1,6 +1,6 @@
 --- SETUP
 local tool = script.Parent;
-local client = require(game:WaitForChild("ReplicatedStorage"):WaitForChild("qGunClient"));
+local client = require(game:GetService("ReplicatedStorage"):WaitForChild("nofairTCM_Client"):WaitForChild("GunKit"));
 local this = client.new {
     tool = tool;
     settings = require(tool:WaitForChild("settings"));

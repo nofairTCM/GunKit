@@ -1,5 +1,5 @@
 
-local qGunClient = require(game:GetService("ReplicatedStorage"):WaitForChild("qGunClient"));
+local qGunClient = require(game:GetService("ReplicatedStorage"):WaitForChild("nofairTCM_Client"):WaitForChild("GunKit"));
 
 qGunClient.init();
 -- 초기화를 진행함 (다른사람이 날린 총알 그리기 등을 위해서 서버와 이벤트 소캣을 연결함 + ui 의 기초를 그려놓음)

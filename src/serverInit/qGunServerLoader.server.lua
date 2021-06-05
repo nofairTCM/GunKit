@@ -1,5 +1,5 @@
 
-local qGunServer = require(game:GetService("ServerStorage"):WaitForChild("qGunServer"));
+local qGunServer = require(game:GetService("ServerStorage"):WaitForChild("nofairTCM_Server"):WaitForChild("GunKit"));
 
 qGunServer.init();
 -- 초기화를 진행함 (다른사람이 날린 총알 그리기 등을 위해서 서버와 이벤트 소캣을 만듬)
