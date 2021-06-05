@@ -1,0 +1,81 @@
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Version
+        run: echo "VERSION=$(date +%Y%m%d)" >> $GITHUB_ENV
+    outputs:
+      version: ${{ env.VERSION }}
+
+  build:
+    needs: setup
+    env:
+      NAME: GunKit
+      PROJECT: build.project.json
+      INFO: src\version.txt
+    runs-on: windows-latest
+    steps:
+      - name: Download this repo
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Download package handler repo
+        uses: actions/checkout@v2
+        with:
+          repository: nofairTCM/Package
+          path: Package
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: build / upload / update package list
+        shell: cmd
+        run: |
+          mkdir out
+          Package\bin\luvit.exe Package build --project %PROJECT% --output out\%Name%.rbxmx
+          Package\bin\luvit.exe Package upload --project %PROJECT% --assetId ${{ secrets.SECRETS_RBLXASSET }} --cookie "${{ secrets.SECRETS_RBLXTOKEN }}"
+          Package\bin\luvit.exe Package updateList --info %INFO% --name %NAME%
+
+      - name: push package list
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.SECRETS_GHDBTOKEN }}
+          branch: ${{ github.ref }}
+          directory: Package
+          repository: nofairTCM/Package
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: out
+          path: ${{ github.workspace }}/out/*
+
+  release:
+    needs: [setup, build]
+    env:
+      VERSION: ${{ needs.setup.outputs.version }}.${{ github.run_number }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download output
+        uses: actions/download-artifact@v2
+        with:
+          name: out
+          path: out
+
+      - name: Upload Plugin Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: out/*
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
