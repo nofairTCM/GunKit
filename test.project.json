@@ -1,0 +1,42 @@
+{
+    "name": "qGun",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "qGunClient": {
+                "$path": "src/client",
+                "callServer": {
+                    "$className": "RemoteFunction"
+                }
+            }
+        },
+        "ServerStorage": {
+            "$className": "ServerStorage",
+            "qGunServer": {
+                "$path": "src/server",
+                "TestGun": {
+                    "$path": "src/example"
+                }
+            }
+        },
+        "ReplicatedFirst": {
+            "$className": "ReplicatedFirst",
+            "nofairTCM_ClientInit": {
+                "$className": "Folder",
+                "qGunClientLoader": {
+                    "$path": "src/clientInit/qGunClientLoader.server.lua"
+                }
+            }
+        },
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+            "nofairTCM_ServerInit": {
+                "$className": "Folder",
+                "qGunServerLoader": {
+                    "$path": "src/serverInit/qGunServerLoader.server.lua"
+                }
+            }
+        }
+    }
+}

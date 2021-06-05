@@ -1,36 +1,9 @@
 {
-    "name": "qGun",
+    "name": "GunKit",
     "tree": {
-        "$className": "DataModel",
-        "ReplicatedStorage": {
-            "$className": "ReplicatedStorage",
-            "qGunClient": {
-                "$path": "src/client",
-                "callServer": {
-                    "$className": "RemoteFunction"
-                }
-            }
+        "$properties": {
+            "Name": "GunKit"
         },
-        "ServerStorage": {
-            "$className": "ServerStorage",
-            "qGunServer": {
-                "$path": "src/server",
-                "TestGun": {
-                    "$path": "src/example"
-                }
-            }
-        },
-        "ReplicatedFirst": {
-            "$className": "ReplicatedFirst",
-            "qGunClientLoader": {
-                "$path": "src/app/bootClient"
-            }
-        },
-        "ServerScriptService": {
-            "$className": "ServerScriptService",
-            "qGunServerLoader": {
-                "$path": "src/app/bootServer"
-            }
-        }
+        "$path": "src"
     }
 }
